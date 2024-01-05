@@ -1,5 +1,10 @@
 # helm-chart-minimum-example
 
+初期化:
+```
+helm create simple-app
+```
+
 ビルドからデプロイまで:
 
 ```
