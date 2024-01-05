@@ -29,4 +29,14 @@ simple-app-deployment-678bcdc8bf-fp8bp   0/1     Completed   2 (27s ago)   29s
 
 $ kubectl logs simple-app-deployment-678bcdc8bf-7kjpn 
 Hello World
+
+$ helm list
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+simple-app-1704471669   default         1               2024-01-06 01:21:09.087351 +0900 JST    deployed        simple-app-0.1.0        1.1.0
+
+$ helm uninstall simple-app-1704471669
+release "simple-app-1704471669" uninstalled
+
+$ helm list                           
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
 ```
