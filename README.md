@@ -37,6 +37,6 @@ simple-app-1704471669   default         1               2024-01-06 01:21:09.0873
 $ helm uninstall simple-app-1704471669
 release "simple-app-1704471669" uninstalled
 
-$ helm list                           
+$ helm list
 NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
 ```
