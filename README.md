@@ -1,42 +1,59 @@
 # helm-chart-minimum-example
 
+https://helm.sh/docs/chart_template_guide/builtin_objects/
+
 初期化:
 ```
 helm create simple-app
 ```
 
-ビルドからデプロイまで:
+Dockerビルド:
 
 ```
 docker build . -t simple-app
 minikube image loadminikube image load simple-app:latest
 ```
 
-デモ:
+develデモ:
+
 ```
-$ helm install ./simple-app --generate-name
-NAME: simple-app-1704471669
-LAST DEPLOYED: Sat Jan  6 01:21:09 2024
+$ helm install ./simple-app --generate-name --values simple-app/devel-values.yml
+NAME: simple-app-1704551432
+LAST DEPLOYED: Sat Jan  6 23:30:33 2024
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 
 $ kubectl get pods
-NAME                                     READY   STATUS      RESTARTS      AGE
-simple-app-deployment-678bcdc8bf-7kjpn   0/1     Completed   2 (27s ago)   29s
-simple-app-deployment-678bcdc8bf-fp8bp   0/1     Completed   2 (27s ago)   29s
+NAME                                     READY   STATUS      RESTARTS   AGE
+simple-app-deployment-676fdf5c75-4l96m   0/1     Completed   0          2s
+simple-app-deployment-676fdf5c75-7srrf   0/1     Completed   0          2s
 
-$ kubectl logs simple-app-deployment-678bcdc8bf-7kjpn 
-Hello World
+$ kubectl logs simple-app-deployment-676fdf5c75-4l96m
+simple-app-1704551432, default
+simple-app, 0.1.0
+開発用設定
+```
 
-$ helm list
-NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
-simple-app-1704471669   default         1               2024-01-06 01:21:09.087351 +0900 JST    deployed        simple-app-0.1.0        1.1.0
+prodデモ:
 
-$ helm uninstall simple-app-1704471669
-release "simple-app-1704471669" uninstalled
+```
+$ helm install ./simple-app --generate-name --values simple-app/prod-values.yml 
+NAME: simple-app-1704551521
+LAST DEPLOYED: Sat Jan  6 23:32:01 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
 
-$ helm list
-NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+$ kubectl get pods
+NAME                                   READY   STATUS      RESTARTS     AGE
+simple-app-deployment-5b77bc47-cmzqf   0/1     Completed   1 (6s ago)   6s
+simple-app-deployment-5b77bc47-tvltx   0/1     Completed   1 (6s ago)   6s
+
+$ kubectl logs simple-app-deployment-5b77bc47-cmzqf
+simple-app-1704551521, default
+simple-app, 0.1.0
+本番設定
 ```

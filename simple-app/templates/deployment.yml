@@ -18,3 +18,10 @@ spec:
         - name: simple-app
           image: "simple-app:latest"
           imagePullPolicy: IfNotPresent
+          env:
+            - name: RELEASE
+              value: "{{ .Release.Name }}, {{ .Release.Namespace }}"
+            - name: CHART
+              value: "{{ .Chart.Name }}, {{ .Chart.Version }}"
+            - name: VALUES
+              value: "{{ .Values.name }}"
